@@ -36,7 +36,7 @@ class UpdateChecker(private val http: OkHttpClient) {
     private fun buildOf(version: String): Int = version.substringAfterLast('.').toIntOrNull() ?: 0
 
     companion object {
-        const val REPO = "marcio-morais/sony_remote_tv"
+        const val REPO = "marcio-morais/sony_remote_tv_android"
         const val APK_URL = "https://github.com/$REPO/releases/latest/download/SonyRemote.apk"
         const val RELEASES_URL = "https://github.com/$REPO/releases/latest"
         private val VERSION_PATTERN = Regex("""\d+\.\d+\.\d+""")

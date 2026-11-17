@@ -17,7 +17,7 @@ Este projeto não é afiliado à Sony. "Sony" e "Bravia" são marcas da Sony Gro
 Cada push na `main` gera um APK pelo GitHub Actions. No celular, abra o link, baixe e instale (o Android vai pedir para permitir a instalação de apps desta fonte):
 
 ```
-https://github.com/marcio-morais/sony_remote_tv/releases/latest/download/SonyRemote.apk
+https://github.com/marcio-morais/sony_remote_tv_android/releases/latest/download/SonyRemote.apk
 ```
 
 O APK é assinado com a chave de debug do build, que muda a cada versão. Por isso o Android pode recusar uma atualização por cima; nesse caso, desinstale o app antes de instalar o novo. Em **Configurações (engrenagem) > Verificar atualização** o app compara a sua versão com a última publicada.
@@ -57,9 +57,17 @@ app/src/main/java/app/sonyremote/tv/
 
 Abra a pasta no Android Studio, ou rode `./gradlew assembleDebug` (JDK 17). O APK sai em `app/build/outputs/apk/debug/`.
 
+## Modelos testados
+
+| Modelo | Teclas | Liga/desliga | Observações |
+|---|---|---|---|
+| KDL-42W655A | Wi-Fi (IRCC) ok | desliga por IRCC, liga por Wake-on-LAN | modelo do autor; IR não testado em todas as teclas |
+
+Testou em outro modelo? Abra uma issue com **"Relatar modelo de TV"** e a linha entra na tabela.
+
 ## Contribuir
 
-Contribuições são bem-vindas, principalmente para outros modelos Bravia: confirmar códigos de teclas, ajustar o comportamento de ligar/desligar e relatar o que funciona no seu modelo. Abra uma issue contando o modelo da TV e o que aconteceu, ou envie um pull request.
+Contribuições são bem-vindas, principalmente para outros modelos Bravia: confirmar códigos de teclas, ajustar o comportamento de ligar/desligar e relatar o que funciona no seu modelo. Veja o [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Pendências
 
