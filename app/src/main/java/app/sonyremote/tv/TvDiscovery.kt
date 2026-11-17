@@ -156,7 +156,6 @@ class TvDiscovery(
             ip = ip,
             name = xmlField(description, "friendlyName").ifBlank { "Sony TV" },
             model = xmlField(description, "modelName"),
-            mac = TvPower.macFromUdn(xmlField(description, "UDN")),
         )
     }
 

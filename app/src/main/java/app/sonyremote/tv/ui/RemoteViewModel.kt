@@ -179,12 +179,10 @@ class RemoteViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun choose(device: TvDevice) {
+        // The UPnP identifier can carry another interface's MAC (Wi-Fi vs. wired), so the MAC is typed
+        // by the user and only kept while the IP stays the same
         updateSettings {
-            it.copy(
-                ip = device.ip,
-                name = device.name,
-                mac = device.mac.ifBlank { if (it.ip == device.ip) it.mac else "" },
-            )
+            it.copy(ip = device.ip, name = device.name, mac = if (it.ip == device.ip) it.mac else "")
         }
         _state.update {
             it.copy(

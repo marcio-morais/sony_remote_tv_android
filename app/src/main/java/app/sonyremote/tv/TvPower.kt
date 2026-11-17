@@ -116,12 +116,5 @@ class TvPower(
             if (hex.length != 12 || !hex.all { it in "0123456789abcdefABCDEF" }) return null
             return ByteArray(6) { hex.substring(it * 2, it * 2 + 2).toInt(16).toByte() }
         }
-
-        /** Sony UPnP identifiers usually end with the MAC: uuid:00000000-0000-1010-8000-a41731a65242. */
-        fun macFromUdn(udn: String): String {
-            val tail = udn.substringAfterLast('-')
-            val bytes = parseMac(tail) ?: return ""
-            return bytes.joinToString(":") { "%02X".format(it) }
-        }
     }
 }

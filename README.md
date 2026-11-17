@@ -30,7 +30,7 @@ A engrenagem abre a conexão: busca automática da TV na rede (SSDP e varredura 
 
 No modo Automático o app usa IR quando o celular tem emissor e a tecla tem código SIRC, e Wi-Fi no resto.
 
-**Ligar e desligar por Wi-Fi.** Na KDL-42W655A o código de alternar liga/desliga é ignorado: a TV só obedece ao código de desligar, e em standby só acorda com Wake-on-LAN. Por isso, por Wi-Fi, o botão Liga consulta o estado da TV, desliga se ela estiver ligada e envia o pacote Wake-on-LAN se estiver em standby. O app também acorda a TV ao ser aberto. Para isso o campo **MAC da TV** precisa estar preenchido (o app tenta preencher sozinho; confira). Outros modelos podem se comportar diferente.
+**Ligar e desligar por Wi-Fi.** Na KDL-42W655A o código de alternar liga/desliga é ignorado: a TV só obedece ao código de desligar, e em standby só acorda com Wake-on-LAN. Por isso, por Wi-Fi, o botão Liga consulta o estado da TV, desliga se ela estiver ligada e envia o pacote Wake-on-LAN se estiver em standby. O app também acorda a TV ao ser aberto. Para isso o campo **MAC da TV** precisa estar preenchido (digite o MAC da interface que a TV usa na rede; na TV ele aparece em Configurações > Rede > Status). Outros modelos podem se comportar diferente.
 
 ## Configurar a TV
 

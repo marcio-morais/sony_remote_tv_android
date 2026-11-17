@@ -636,7 +636,7 @@ private fun SettingsSheet(state: UiState, viewModel: RemoteViewModel) {
                 value = state.settings.mac,
                 onValueChange = viewModel::setMac,
                 label = { Text("MAC da TV (para ligar)") },
-                supportingText = { Text("Ex.: AA:BB:CC:DD:EE:FF. Usado para ligar a TV em standby.") },
+                supportingText = { Text("Ex.: AA:BB:CC:DD:EE:FF. Use o MAC da interface que a TV usa na rede (Rede > Status, na TV).") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
             )
