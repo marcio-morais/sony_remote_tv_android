@@ -7,8 +7,10 @@ import android.hardware.ConsumerIrManager
 class SonyIrRemote(context: Context) {
     private val ir = context.getSystemService(Context.CONSUMER_IR_SERVICE) as? ConsumerIrManager
 
+    /** True when the phone has an IR blaster. */
     val isAvailable: Boolean get() = ir?.hasIrEmitter() == true
 
+    /** Transmits [command] to the device [address] (1 = TV), repeating the frame [repeats] times. */
     fun send(command: Int, address: Int = TV_ADDRESS, repeats: Int = FRAME_REPEATS) {
         val frame = buildFrame(command, address)
         // Sony expects the frame repeated at least 3 times, 45 ms apart
@@ -31,10 +33,12 @@ class SonyIrRemote(context: Context) {
     }
 
     companion object {
+        /** SIRC device address of a TV. */
         const val TV_ADDRESS = 1
         const val FRAME_REPEATS = 3
         private const val CARRIER_HZ = 40_000
         private const val FRAME_PERIOD_US = 45_000
+        // SIRC timings in microseconds: 2.4 ms header, then 1.2 ms (1) or 0.6 ms (0) marks
         private const val HEADER_MARK_US = 2_400
         private const val ONE_MARK_US = 1_200
         private const val ZERO_MARK_US = 600

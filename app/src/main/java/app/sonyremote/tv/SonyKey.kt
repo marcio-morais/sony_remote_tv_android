@@ -9,10 +9,19 @@ package app.sonyremote.tv
  *
  * For device-1 keys the SIRC command is the byte right before the "Aw==" suffix of the
  * IRCC payload (for example POWER ends in 0x15 = 21).
+ *
+ * Status comments mark what was checked on a real KDL-42W655A. "Untested" keys follow the
+ * public Sony codes and should work, but nobody has confirmed them yet: reports for other
+ * models are welcome (see CONTRIBUTING.md).
  */
 enum class SonyKey(val irccCode: String, val sircCommand: Int? = null) {
+    // The TV ignores this toggle code; TvPower sends POWER_OFF / Wake-on-LAN instead
     POWER("AAAAAQAAAAEAAAAVAw==", 21),
+
+    // The only power code this TV obeys (it turns off, never on)
     POWER_OFF("AAAAAQAAAAEAAAAvAw==", 47),
+
+    // Tested
     VOLUME_UP("AAAAAQAAAAEAAAASAw==", 18),
     VOLUME_DOWN("AAAAAQAAAAEAAAATAw==", 19),
     MUTE("AAAAAQAAAAEAAAAUAw==", 20),
@@ -26,10 +35,12 @@ enum class SonyKey(val irccCode: String, val sircCommand: Int? = null) {
     CONFIRM("AAAAAQAAAAEAAABlAw==", 101),
     HOME("AAAAAQAAAAEAAABgAw==", 96),
     INFO("AAAAAQAAAAEAAAA6Aw==", 58),
+
+    // Untested
     EXIT("AAAAAQAAAAEAAABjAw==", 99),
     JUMP("AAAAAQAAAAEAAAA7Aw==", 59),
 
-    // Digits: SIRC command is the digit minus one (0 is 9)
+    // Untested. Digits: SIRC command is the digit minus one (0 is 9)
     NUM1("AAAAAQAAAAEAAAAAAw==", 0),
     NUM2("AAAAAQAAAAEAAAABAw==", 1),
     NUM3("AAAAAQAAAAEAAAACAw==", 2),
@@ -41,8 +52,10 @@ enum class SonyKey(val irccCode: String, val sircCommand: Int? = null) {
     NUM9("AAAAAQAAAAEAAAAIAw==", 8),
     NUM0("AAAAAQAAAAEAAAAJAw==", 9),
 
-    // Extended codes: Wi-Fi only
+    // Extended codes: Wi-Fi only. BACK is tested
     BACK("AAAAAgAAAJcAAAAjAw=="),
+
+    // Untested
     OPTIONS("AAAAAgAAAJcAAAA2Aw=="),
     SEN("AAAAAgAAABoAAAB9Aw=="),
     RED("AAAAAgAAAJcAAAAlAw=="),

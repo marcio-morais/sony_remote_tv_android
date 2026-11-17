@@ -54,6 +54,10 @@ class TvPower(
     private fun pinned(network: Network?): OkHttpClient =
         if (network != null) http.newBuilder().socketFactory(network.socketFactory).build() else http
 
+    /**
+     * Order matters: the TV's own answer wins; no network answer at all means deep standby;
+     * otherwise the TV is up but cannot report, so we trust what we last sent.
+     */
     private fun stateOf(settings: TvSettings, network: Network?): PowerState {
         queryStatus(settings, network)?.let { return it }
         if (!reachable(settings.ip, network)) return PowerState.STANDBY
@@ -79,6 +83,7 @@ class TvPower(
         }
     }.getOrNull()
 
+    /** A plain TCP connect: it only proves the network is up, not that the TV is on (it answers in standby too). */
     private fun reachable(ip: String, network: Network?): Boolean = runCatching {
         val socket = network?.socketFactory?.createSocket() ?: Socket()
         socket.use { it.connect(InetSocketAddress(ip, 80), 1500) }
@@ -95,6 +100,7 @@ class TvPower(
 
     private fun sendMagicPacket(mac: ByteArray, tvIp: String, network: Network?) {
         val packet = ByteArray(6) { 0xFF.toByte() } + ByteArray(16 * 6) { mac[it % 6] }
+        // Both broadcasts, on ports 9 and 7: routers and TVs differ in which one they let through
         val targets = listOf("255.255.255.255", tvIp.substringBeforeLast('.') + ".255")
         DatagramSocket().use { socket ->
             network?.bindSocket(socket)

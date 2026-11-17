@@ -24,6 +24,7 @@ class TvRemote(
     /** Wakes the TV if it is in standby (used when the app opens). Null = nothing was needed. */
     suspend fun wakeIfStandby(settings: TvSettings): SendResult? = power.wakeIfStandby(settings)
 
+    /** Which transport a key will use: forced by the mode, or in AUTO, IR whenever possible. */
     fun routeFor(key: SonyKey, mode: TransportMode): Route = when (mode) {
         TransportMode.WIFI -> Route.WIFI
         TransportMode.IR -> Route.IR
@@ -31,6 +32,7 @@ class TvRemote(
             if (ir.isAvailable && key.sircCommand != null) Route.IR else Route.WIFI
     }
 
+    /** Sends [key] using the route chosen by [routeFor]. */
     suspend fun send(key: SonyKey, settings: TvSettings): SendResult =
         when (routeFor(key, settings.mode)) {
             Route.IR -> sendIr(key)

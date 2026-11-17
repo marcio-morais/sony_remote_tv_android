@@ -250,6 +250,8 @@ class RemoteViewModel(application: Application) : AndroidViewModel(application) 
 
     private companion object {
         const val LOG_LIMIT = 8
+        // Opening the app fires wakeIfStandby(); the cooldown avoids repeated packets when the user
+        // flips quickly between apps
         const val WAKE_COOLDOWN_MS = 60_000L
     }
 }

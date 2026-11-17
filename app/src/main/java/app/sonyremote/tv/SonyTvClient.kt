@@ -14,12 +14,16 @@ data class SendResult(val ok: Boolean, val detail: String)
 /**
  * Sends IRCC commands to a Sony Bravia over Wi-Fi (HTTP SOAP).
  * Needs android:usesCleartextTraffic="true" because the TV speaks plain HTTP.
+ *
+ * [preSharedKey] is the Pre-Shared Key configured in the TV's IP control settings;
+ * it is sent in the X-Auth-PSK header and may be blank if the TV does not require one.
  */
 class SonyTvClient(
     private val http: OkHttpClient,
     private val tvIp: String,
     private val preSharedKey: String,
 ) {
+    /** Posts the key's IRCC code to the TV. Never throws: failures come back in [SendResult]. */
     suspend fun send(key: SonyKey): SendResult = withContext(Dispatchers.IO) {
         val body = envelope(key.irccCode).toRequestBody("text/xml; charset=UTF-8".toMediaType())
 
