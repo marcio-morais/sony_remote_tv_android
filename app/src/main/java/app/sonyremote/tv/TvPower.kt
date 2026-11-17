@@ -110,7 +110,7 @@ class TvPower(
     }
 
     companion object {
-        /** Accepts "A4:17:31:A6:52:42", "a4-17-31-a6-52-42" or plain hex. */
+        /** Accepts "AA:BB:CC:DD:EE:FF", "aa-bb-cc-dd-ee-ff" or plain hex. */
         fun parseMac(text: String): ByteArray? {
             val hex = text.filter { it.isLetterOrDigit() }
             if (hex.length != 12 || !hex.all { it in "0123456789abcdefABCDEF" }) return null
